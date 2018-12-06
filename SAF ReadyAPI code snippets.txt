@@ -1,0 +1,15 @@
+import com.eviware.soapui.support.GroovyUtils
+
+def groovyUtils = new com.eviware.soapui.support.GroovyUtils ( context )
+def holder = groovyUtils.getXmlHolder("CountriesUsingCurrencyRequest#Response")
+
+holder.namespaces ["ns1"] = "http://www.oorsprong.org/websamples.countryinfo "
+
+def nodeValueResp = holder.getNodeValues("//ns1:CountriesUsingCurrencyResponse[1]")
+
+if (nodeValueResp == null)
+
+	log.error "Countries using currency has a null values response"
+
+// DataSink - used to obtain status testrunner
+${=testRunner.results[testRunner.results.size()-1].status}

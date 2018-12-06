@@ -1,0 +1,11 @@
+${ListOfCurrenciesByCode#Response#//ListOfCurrenciesByCodeResult/tCurrency/sISOCode}
+m:ListOfCurrenciesByCodeResponse/m:ListOfCurrenciesByCodeResult/m:tCurrency
+
+${ListOfCurrenciesByCode#Response#//m:ListOfCurrenciesByCodeResponse/m:ListOfCurrenciesByCodeResult/m:tCurrency/sISOCode}
+
+${ListOfCurrenciesByCode#Response#//ListOfCurrenciesByCodeResult/tCurrency/sISOCode}
+
+//m:ListOfCurrenciesByCodeResponse[1]/m:ListOfCurrenciesByCodeResult[1]/m:tCurrency[1]/m:sISOCode[1]
+
+
+//*m:sISOCode[1]
