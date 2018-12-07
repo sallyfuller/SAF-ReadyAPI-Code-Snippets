@@ -13,3 +13,63 @@ if (nodeValueResp == null)
 
 // DataSink - used to obtain status testrunner
 ${=testRunner.results[testRunner.results.size()-1].status}
+
+// Loop
+
+
+// If & Else statement example
+ int a = 12 
+		
+      //Check for the boolean condition 
+      if (a>100) {
+         //If the condition is true print the following statement 
+         println("The value is less than 100"); 
+      } else 
+         // Check if the value of a is greater than 5 
+			
+      if (a>5) { 
+         //If the condition is true print the following statement 
+         println("The value is greater than 5 and greater than 100"); 
+      } else { 
+         //If the condition is false print the following statement 
+         println("The value of a is less than 5"); 
+
+
+// Extract a single XML node value from the API response
+import com.eviware.soapui.support.GroovyUtils
+
+def groovyUtils = new com.eviware.soapui.support.GroovyUtils ( context )
+def holder = groovyUtils.getXmlHolder("CountriesUsingCurrencyRequest#Response")
+
+holder.namespaces ["ns1"] = "http://www.oorsprong.org/websamples.countryinfo"
+
+def nodeValueResp = holder.getNodeValue("//ns1:CountriesUsingCurrencyResponse[1]/ns1:CountriesUsingCurrencyResult[1]/ns1:tCountryCodeAndName[1]/ns1:sISOCode[1]")
+
+if (nodeValueResp == null)
+	{
+	log.error "Countries using currency has a null values response"
+	}
+else
+	{
+	log.info "Response returned: " + nodeValueResp.toString()
+	}
+
+// Extract all XML nodes in a response
+import com.eviware.soapui.support.GroovyUtils
+
+def groovyUtils = new com.eviware.soapui.support.GroovyUtils ( context )
+def holder = groovyUtils.getXmlHolder("CountriesUsingCurrencyRequest#Response")
+
+holder.namespaces ["ns1"] = "http://www.oorsprong.org/websamples.countryinfo"
+
+def nodeValueResps = holder.getNodeValues("//ns1:CountriesUsingCurrencyResponse[1]/ns1:CountriesUsingCurrencyResult[1]")
+
+if (nodeValueResps == null)
+	{
+	log.error "Countries using currency has a null values response"
+	}
+else
+	{
+	for (item in holder.getNodeValues("//ns1:tCountryCodeAndName/ns1:sISOCode"))
+		log.info "Response returned: [$item]"
+	}
