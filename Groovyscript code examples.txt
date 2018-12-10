@@ -1,0 +1,30 @@
+// To obtain ProductCode from PrevHospProduct
+//XML logic
+ <ns2:PrevHospProducts>
+                    <ns2:PrevHospProduct>
+                       <ns2:ProductCode>D00</ns2:ProductCode>
+                       <ns2:ExcessPaid>Yes</ns2:ExcessPaid>
+                    </ns2:PrevHospProduct>
+                    <ns2:PrevHospProduct>
+                       <ns2:ProductCode>900</ns2:ProductCode>
+                    </ns2:PrevHospProduct>
+                 </ns2:PrevHospProducts>
+                 <ns2:PrevExtrasProducts>
+                    <ns2:PrevExtraProduct>
+                       <ns2:ProductCode>00A</ns2:ProductCode>
+                    </ns2:PrevExtraProduct>
+                 </ns2:PrevExtrasProducts>
+
+//Groovy code example
+def expectedCodes = ['D00','900'] 
+def pxml = new XmlSlurper().parseText(context.response)
+def actualCodes = pxml.'**'.findAll{it.name() == 'PrevHospProduct'}*.ProductCode*.text() as List
+log.info actualCodes
+assert expectedCodes.sort() == actualCodes.sort()
+
+//FindAll
+def expectedCodes = ['D00','900'] 
+def pxml = new XmlSlurper().parseText(context.response)
+def actualCodes = pxml.'**'.findAll{it.name() == 'PrevHospProduct'}*.ProductCode*.text() as List
+log.info actualCodes
+assert expectedCodes.sort() == actualCodes.sort()
